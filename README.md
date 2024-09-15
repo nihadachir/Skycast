@@ -1,2 +1,2 @@
-# tawjihi
-Tawjihi is an integrated school management application.
+# Skycast
+Skycast is an integrated meteo application.

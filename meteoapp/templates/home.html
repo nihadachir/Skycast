@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="icon" href="{% static 'meteo.jpeg' %}" type="image/x-icon">
+    <title>Weather App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!--couramment utilisée dans les applications web pour assurer une présentation correcte et adaptative sur les appareils mobiles en spécifiant les propriétés de la vue. Elle contrôle des aspects tels que la largeur de l'écran, le niveau initial de zoom et la possibilité de zoomer par l'utilisateur.-->   
+    <!-- Metro UI CSS -->
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+    <!-- Stylesheet personnalisé -->
+    <link rel="stylesheet" href="static/style.css">   
+    <!-- Boxicons CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.0/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <ul class="h-menu">
+            <li><a href="{% url 'home' %}"><span class="mif-home mif-2x"></span> Home</a></li>
+            <li><a href="{% url 'show_news' %}"><span class="mif-news mif-2x"></span> News</a></li>
+            <li><a href="{% url 'show_map' %}"><span class="mif-location mif-2x"></span> Maps</a></li>
+           
+            <li><a href="{% url 'nasa_satellite_info' %}"><span class="mif-satellite mif-2x"></span> Satellites</a></li>
+        </ul>
+        <div class="container2">
+         <div class="subcontainer">
+            <div class="title">
+                <h1> SkyCast :  Your Intuitive <br>Online Weather Companion </h1>
+            </div>
+      
+            <div class="search-bar">
+                <form action="#" method="get">
+                    <div class="input-control">
+                        <input type="text" name="search" placeholder="   Search for Location" value=" {{weather_data.city}}">
+                        <button><i class='bx bx-search' id="searchIcon"></i></button>
+                    </div>
+                </form>
+            </div>
+         </div>
+        
+         <div class="card weather-card">
+            <div class="card-header" style="font-size: larger;">
+                {{ weather_data.city }}
+                 {% if weather_data.condition == "Clouds" %}
+                <i class='bx bxs-cloud' style='font-size: 40px; color: #3498db;'></i>
+                {% elif weather_data.condition == "Clear" %}
+                <i class='bx bxs-sun' style='font-size: 40px; color: #f39c12;'></i>
+                {% elif weather_data.condition == "Rain" %}
+                <i class='bx bxs-cloud-rain' style='font-size: 40px; color: #3498db;'></i>
+                {% elif weather_data.condition == "Thunderstorm" %}
+                <i class='fas fa-wind' style='font-size: 40px; color: #f1c40f;'></i>
+                {% elif weather_data.condition == "Snow" %}
+                <i class='bx bx-cloud-snow' style='font-size: 40px; color: #888;'></i>
+                {% else %}
+                <!-- Default colored icon for other conditions -->
+                <i class='fas fa-question-circle' style='font-size: 40px; color: #7f8c8d;'></i>
+               {% endif %}
+           
+           
+
+            </div>
+            
+            <div class="card-content p-2">
+               
+               <p>{% now "Y-m-d" %}</p> 
+                <br> <!-- Add the current date below the weather information -->
+              <div style="font-weight:bold ; font-size: 40px; color: black;">{{ weather_data.temp|floatformat:2 }}°C</div>  <br>
+
+            <p>  Hum | {{ weather_data.humidity|floatformat:2 }}% </p> 
+               <p> {{ weather_data.wind|floatformat:2 }} m/s  | Wind</p> 
+            </div>
+           </div>
+          
+        
+           
+        </div>
+        <div class="weekly-forecast">
+            <h2>Weekly Forecast</h2>
+            <div class="forecast-cards">
+                {% for day in weather_data.weekly_data %}
+                    <div class="card">
+                        <div class="card-header">
+                            {{ day.day_of_week }}
+                        </div>
+                        <div class="card-content">
+                            <p>{{ day.temperature|floatformat:2 }}°C</p>
+                            {% if day.condition == "Clouds" %}
+                            <i class='bx bxs-cloud' style='font-size: 40px; color: #3498db;'></i>
+                            {% elif day.condition == "Clear" %}
+                            <i class='bx bxs-sun' style='font-size: 40px; color: #f39c12;'></i>
+                            {% elif day.condition == "Rain" %}
+                            <i class='bx bxs-cloud-rain' style='font-size: 40px; color: #3498db;'></i>
+                            {% elif day.condition == "Thunderstorm" %}
+                            <i class='fas fa-wind' style='font-size: 40px; color: #f1c40f;'></i>
+                            {% elif day.condition == "Snow" %}
+                            <i class='bx bx-cloud-snow' style='font-size: 40px; color: #888;'></i>
+                            {% else %}
+                            <!-- Default colored icon for other conditions -->
+                            <i class='fas fa-question-circle' style='font-size: 40px; color: #7f8c8d;'></i>
+                           {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+  
+<!-- Metro UI JavaScript -->
+<script src="https://cdn.metroui.org.ua/current/metro.js"></script>
+
+</body>
+</html>

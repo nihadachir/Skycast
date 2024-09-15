@@ -1,0 +1,235 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* Dans le fichier style.css */
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("i2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+ul.h-menu {
+    list-style: none;
+    float: right;
+    margin-top: 10px;
+    margin-left: 55%; /* Adjust this margin to your preference */
+    background-color: transparent;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ul.h-menu li {
+    display: inline;
+    margin-right: 16px;
+}
+
+
+
+.search-bar {
+    margin-top: 200px;
+    margin-right: 410px; /* Adjust the margin as needed */
+    padding: 10px 5px;
+    display: flex;
+    width: 400px; /* Adjust the width as needed */
+    height: 100px;
+    border-color:white ;
+
+    
+}
+
+.input-control {
+    display: flex;
+    align-items: center;
+    width: 400px; /* Adjust the width as needed */
+    
+   
+    
+}
+
+.input-control input {
+    flex: 1;
+    height: 50px;
+    border-radius: 15px;
+    border-style: none;
+    background-color: rgb(199, 197, 197);
+    opacity: 100;
+}
+.input-control i {
+    position: absolute;
+    right: 10px; /* Adjust the right position as needed */
+    color: #888; /* Adjust the color as needed */
+    cursor: pointer;
+    font-size: 20px;
+    
+}
+.title {
+    font-size: x-large; /* Ajustez la taille de la police au besoin */
+    margin-top: 50px; /* Ajustez la marge supérieure à 0 pour rapprocher le titre */
+    height: 80px; /* Hauteur fixe pour le titre */
+    font-weight: bold;
+}
+
+.search-bar {
+    margin-top: 50px; /* Ajustez la marge supérieure pour séparer la barre de recherche du titre */
+    margin-right: 410px; /* Ajustez la marge droite au besoin */
+    padding: 10px 5px;
+    display: flex;
+    width: 400px; /* Ajustez la largeur au besoin */
+    height: 100px;
+    border-color: white;
+}
+.input-control {
+    display: flex;
+    align-items: flex-start; /* Align items to the start (top) */
+    width: 400px;
+}
+
+.input-control input {
+    flex: 1;
+    height: 50px;
+    border-radius: 15px;
+    border-style: none;
+    background-color: rgb(199, 197, 197);
+    opacity: 100;
+}
+
+.input-control i {
+    margin-left: 10px; /* Add margin to the left of the button */
+    color: #888;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+.title h1 {
+    font-weight: bold; /* Ajustez la taille de la police au besoin */
+}
+
+.container2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.subcontainer {
+    flex: 1; /* Pour que subcontainer prenne autant d'espace que possible */
+    /* Ajoutez d'autres styles au besoin */
+}
+
+.weather-card {
+    width: 500px;
+    margin-top: 50px;
+    height: 55vh;
+    background-color: transparent;
+    opacity: 0.9; /* Couleur blanche avec une opacité de 0.8 */
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.5); /* Valeurs pour l'ombre */
+    border: 1px solid #888; /* Couleur de la bordure */
+    border-radius: 7px;
+    
+}
+
+.card-header i{
+    float: right;
+}
+.card-header {
+    font-weight: bolder;
+    
+    letter-spacing: 2px;
+    
+    font-size: 28px; /* Increase the font size as needed */
+    color: black;
+}
+
+.card-content{
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+   
+}
+
+.weekly-forecast {
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+}
+.weekly-forecast h2{
+    font-size: 30px; /* Ajustez la taille de la police au besoin */
+  
+    height: 80px; /* Hauteur fixe pour le titre */
+    font-weight: bold;
+
+}
+.forecast-cards {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card {
+    width: 40%;/* Adjust the width of each forecast card as needed */
+    background-color: transparent;
+    opacity: 0.9;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+    border: 1px solid #888;
+    border-radius: 7px;
+    margin: 10px;
+}
+
+.card-header {
+    font-weight: bolder;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-size: 16px; /* Adjust the font size as needed */
+    color: black;
+}
+
+.card-content {
+    text-align: center;
+    font-size: 10px;
+    /* Adjust the font size as needed */
+    color: rgb(0, 0, 0);
+}
+.card-content p{
+    font-size: 20px;
+}
+@media screen and (max-width: 1200px) {
+    ul.h-menu {
+        margin-left: 0; /* Adjust the margin for smaller screens */
+    }
+
+    .search-bar {
+        margin-top: 30vw;
+        margin-right: 2vw;
+        width: 90vw;
+    }
+
+    /* Add the following styles */
+    .container2 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .subcontainer {
+        width: 100%;
+    }
+
+    .weather-card {
+        margin-top: 2rem;
+        width: 50%;
+    }
+    .forecast-cards {
+        flex-direction: column; /* Changer la direction en colonne pour les petits écrans */
+        align-items: center;
+    }
+}

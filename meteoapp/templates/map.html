@@ -1,0 +1,60 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maps</title>
+    <link rel="icon" href="{% static 'meteo.jpeg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.0/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="{% static 'style3.css' %}">  
+</head>
+
+<body>
+    <ul class="h-menu">
+        <li><a href="{% url 'home' %}"><span class="mif-home mif-2x"></span> Home</a></li>
+        <li><a href="{% url 'show_news' %}"><span class="mif-news mif-2x"></span> News</a></li>
+        <li><a href="{% url 'show_map' %}"><span class="mif-location mif-2x"></span> Maps</a></li>
+       
+        <li><a href="{% url 'nasa_satellite_info' %}"><span class="mif-satellite mif-2x"></span> Satellites</a></li>
+    </ul>
+    <div id="map" style="width: 100%; height: 100%;"></div>
+
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([0, 15], 3);  // Set the center and zoom level as needed
+
+        // Add a tile layer (background map)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        
+
+        // Loop through weather data list and add markers for each country
+        //le code ne fasse pas appel directement à une API d'OpenStreetMap via des requêtes HTTP explicites, il utilise la bibliothèque Leaflet, qui elle-même interagit avec l'API d'OpenStreetMap pour récupérer et afficher les tuiles de carte nécessaires. Cela simplifie le processus pour les développeurs, car Leaflet gère les détails de communication avec l'API en arrière-plan.
+        '{% for weather_data in weather_data_list %}'
+    var tempCity = '{{ weather_data.temp_city |floatformat:2 }}°C';
+    var weatherIconClass = '{{ weather_data.weather_icon }}';
+    var markerIcon = L.divIcon({
+        className: 'marker-icon',
+        html: '<span class="temp">' + tempCity + '</span><i class="' + weatherIconClass + '" style="font-size: 20px; color: #3498db;"></i>',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41]
+    });
+
+    L.marker(['{{ weather_data.lar }}', '{{ weather_data.lon }}'], {icon: markerIcon}).addTo(map).bindPopup('{{ weather_data.country }} |{{weather_data.pressure}} hPa');
+'{% endfor %}'
+    </script>
+</body>
+</html>

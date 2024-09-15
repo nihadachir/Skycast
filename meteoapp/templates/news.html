@@ -1,0 +1,69 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'meteo.jpeg' %}" type="image/x-icon">
+    <title>News</title>
+   
+    <!-- Include Metro UI CSS files -->
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+     <!-- Link to the custom stylesheet -->
+     <!--<link rel="stylesheet" href="{% static 'style.css' %}">-->
+
+     <link rel="stylesheet" href="{% static 'style2.css' %}">
+
+    
+    
+</head>
+<body>
+    <div id="image-container">
+        <img src="{% static 'nnee.jpg'%}" alt="Image d'introduction" style="height: 100%; width: 100%;"  >
+    </div>
+    <ul class="h-menu">
+        <li><a href="{% url 'home' %}"><span class="mif-home mif-2x"></span> Home</a></li>
+        <li><a href="{% url 'show_news' %}"><span class="mif-news mif-2x"></span> News</a></li>
+        <li><a href="{% url 'show_map' %}"><span class="mif-location mif-2x"></span> Maps</a></li>
+        <li><a href="{% url 'nasa_satellite_info' %}"><span class="mif-satellite mif-2x"></span> Satellites</a></li>
+    </ul>
+    <div id="news-container">
+    <div class="container">
+        <div class="card__container">
+            {% for article in articles %}
+            {%if article.urlToImage is not None%}
+           <article class="card__article">
+              <img src="{{ article.urlToImage }}" alt="image" class="card__img">
+
+              <div class="card__data">
+                {% if article.description is not None %}
+                 <span class="card__description">{{ article.description }}</span>
+                 {% endif %}
+                 <h2 class="card__title">{{ article.title }}</h2>
+                 <a href="{{ article.url }}" class="card__button">Read More</a>
+              </div>
+           </article>
+           {% endif %}
+    {% endfor %}
+        </div>
+     </div>
+    </div>
+    
+     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+  // Add a listener to the image container to detect when the animation is complete
+  const imageContainer = document.getElementById("image-container");
+  imageContainer.addEventListener("animationend", function() {
+    // Hide the image container
+    imageContainer.style.display = "none";
+
+    // Show the news container
+    const newsContainer = document.getElementById("news-container");
+    newsContainer.style.display = "block";
+  });
+});
+    </script>
+
+</body>
+</html>
